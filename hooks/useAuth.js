@@ -20,8 +20,7 @@ const useAuthProvider = () => {
   const [error, setError] = useState(null);
 
   //stores additional info about the user based on what we pass - email, name, birthday, etc
-  const createUser = ({ uid, email, name }) => {
-    if (!uid) return;
+  const createUser = ({ uid, email, name, wishList }) => {
     //check if there was already a doc inside user collection
     return db
       .collection("users")
@@ -30,13 +29,14 @@ const useAuthProvider = () => {
         uid,
         email,
         name,
-        wishList: [],
+        wishList,
       })
       .then(() => {
         setUser({
           uid,
           email,
           name,
+          wishList,
         });
       })
       .catch((err) => {
@@ -70,7 +70,7 @@ const useAuthProvider = () => {
         auth.currentUser.sendEmailVerification();
         //brings data passed into firestore db
         setError(null);
-        return createUser({ uid: res.user.uid, email, name });
+        return createUser({ uid: res.user.uid, email, name, wishList: [] });
       })
       .catch((err) => {
         setError(err);
@@ -146,6 +146,19 @@ const useAuthProvider = () => {
     }
   };
 
+  const addToWishList = async (wishListItem) => {
+    if (user) {
+      // we add to the list
+      // delete specific item included inside the list
+      // option 1= make sure we have everything inside the array and then we push on item to it and then insert that
+      //option 2= push indiv
+      await db.collection("users").doc(user.uid).update({
+        wishList: wishListItem,
+      });
+      getUserAdditionalData(user);
+    }
+  };
+
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleAuthStateChanged);
 
@@ -153,7 +166,7 @@ const useAuthProvider = () => {
   }, []);
 
   useEffect(() => {
-    if (user?.uid) {
+    if (user?.id) {
       const unsubscribe = db
         .collection("users")
         .doc(user.uid)
@@ -175,6 +188,18 @@ const useAuthProvider = () => {
       });
   };
 
+  // const deleteItemFromWishList = async();
+
   //what our state has access too from useAuth hook
-  return { user, error, signUp, signIn, loginWithGoogle, logout, updateAbout, updateProfilePic };
+  return {
+    user,
+    error,
+    signUp,
+    signIn,
+    loginWithGoogle,
+    logout,
+    updateAbout,
+    updateProfilePic,
+    addToWishList,
+  };
 };
