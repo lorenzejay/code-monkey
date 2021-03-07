@@ -1,8 +1,7 @@
 import firebase from "firebase/app";
-import "firebase/auth"; //lets us create users
-import "firebase/firestore"; //lets us add to our database
-import "firebase/storage"; //let us add pictures
-import "firebase/analytics";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 //this is from firebase
 var firebaseConfig = {
@@ -18,7 +17,6 @@ var firebaseConfig = {
 //init
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
 }
 const app = firebase.app();
 const auth = firebase.auth();
