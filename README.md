@@ -9,3 +9,4 @@
 3.  Logo can be used to redirect users back to the store's homepage
 4.  Once user has added item to wishlist, user will be alerted that the item has been added to their wishlist
 5.  The total price of the items selected will be displayed at the bottom of the page.
+6.  Users can logout of their accounts and sign in again.
