@@ -14,7 +14,7 @@ const Signup = () => {
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      return router.push("/myWishList");
+      return router.push("/");
     }
   }, [auth]);
 

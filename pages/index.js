@@ -9,6 +9,14 @@ const Home = ({ data }) => {
   const { addToWishList, user } = auth;
   console.log(user);
 
+  const handleAddToWishList = (item) => {
+    if (user) {
+      addToWishList([...user.wishList, item]);
+    } else {
+      window.alert("You must be logged in to add to your wishlist.");
+    }
+  };
+
   return (
     <Layout>
       <Head>
@@ -25,7 +33,7 @@ const Home = ({ data }) => {
                 <img src={item.image} className="w-auto my-5  object-cover" />
                 <p>${item.price}</p>
                 <button
-                  onClick={() => addToWishList([...user.wishList, item])}
+                  onClick={() => handleAddToWishList(item)}
                   className="bg-gray-800 text-white px-3 py-1"
                 >
                   Add to Wishlist
