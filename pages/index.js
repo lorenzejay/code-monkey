@@ -11,6 +11,9 @@ const Home = ({ data }) => {
 
   return (
     <Layout>
+      <Head>
+        <title>The Monkey Store</title>
+      </Head>
       <PaddingWrapper>
         <section className="flex flex-col items-center justify-center lg:grid lg:grid-cols-3 lg:gap-5">
           {data.map((item) => {
@@ -19,7 +22,7 @@ const Home = ({ data }) => {
                 <Link href={`/wishlist/${item.id}`}>
                   <a className="text-2xl font-bold mb-3">{item.title}</a>
                 </Link>
-                <img src={item.image} className="w-64 h-64 my-5  object-cover" />
+                <img src={item.image} className="w-auto my-5  object-cover" />
                 <p>${item.price}</p>
                 <button
                   onClick={() => addToWishList([...user.wishList, item])}

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import Head from "next/head";
 import Layout from "../components/layout";
 import PaddingWrapper from "../components/paddingWrapper";
 import { useAuth } from "../hooks/useAuth";
@@ -17,24 +17,24 @@ const SignIn = () => {
     e.preventDefault();
     await signIn(email, password);
     if (error === null) {
-      router.push("/myWishList");
+      router.push("/");
     }
   };
 
   useEffect(() => {
     if (user !== null) {
-      router.push("/myWishList");
+      router.push("/");
     }
   }, [user]);
 
   return (
     <Layout>
-      <PaddingWrapper className="w-full flex items-center justify-center">
+      <PaddingWrapper className="w-full flex items-center justify-center h-screen">
         <form
           onSubmit={handleLogin}
-          className="flex flex-col items-center justify-center w-full lg:w-1/2"
+          className="flex flex-col items-center justify-center w-full lg:w-1/2 mb-96"
         >
-          <h1>Login</h1>
+          <h1 className="text-3xl font-bold">Login</h1>
           <input
             placeholder="email"
             type="name"
@@ -50,8 +50,8 @@ const SignIn = () => {
             required
           />
 
-          <button type="submit" className="text-white bg-gray-800 mt-3">
-            Submit
+          <button type="submit" className="text-white bg-gray-800 mt-3 px-3 py-2 w-1/2">
+            Login
           </button>
         </form>
       </PaddingWrapper>

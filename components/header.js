@@ -9,7 +9,7 @@ const Header = () => {
     <PaddingWrapper>
       <div className="px-3 w-full bg-gray-600 h-24 flex justify-between items-center text-white">
         <Link href="/" className="text-white text-3xl">
-          <a className="text-3xl">The Monkey Store</a>
+          <img src={"/monkey.png"} className="w-16 object-cover cursor-pointer" />
         </Link>
         {!user && (
           <ul className="flex w-56 justify-around cursor-pointer">
@@ -27,7 +27,7 @@ const Header = () => {
               <Link href="/myWishList">
                 {user.wishList ? (
                   <a>
-                    Wish List <span className="bg-blue-300">{user.wishList.length}</span>
+                    Wish List <span className="bg-blue-300 px-3">{user.wishList.length}</span>
                   </a>
                 ) : (
                   <a>Wish List</a>

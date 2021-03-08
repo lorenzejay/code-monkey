@@ -148,15 +148,21 @@ const useAuthProvider = () => {
 
   const addToWishList = async (wishListItem) => {
     if (user) {
-      // we add to the list
-      // delete specific item included inside the list
-      // option 1= make sure we have everything inside the array and then we push on item to it and then insert that
-      //option 2= push indiv
       await db.collection("users").doc(user.uid).update({
         wishList: wishListItem,
       });
+      window.alert("You've added the item to your wishlist.");
       getUserAdditionalData(user);
     }
+  };
+
+  const deleteItemFromWishList = async (newWishList) => {
+    if (user) {
+      await db.collection("users").doc(user.uid).update({
+        wishList: newWishList,
+      });
+    }
+    getUserAdditionalData(user);
   };
 
   useEffect(() => {
@@ -201,5 +207,6 @@ const useAuthProvider = () => {
     updateAbout,
     updateProfilePic,
     addToWishList,
+    deleteItemFromWishList,
   };
 };
